@@ -5,6 +5,10 @@ import re
 plt.switch_backend('Qt4Agg')  
 
 data = np.loadtxt('test.csv', delimiter=',', skiprows=1, usecols=(3,), unpack=True)
+data_arange = np.sort(data)
+print data_arange
+split_data = np.split(data_arange, [10,15,30,60,90,120,240,500])
+print split_data
 
 d1max = np.max(data)
 print 'Max: ' + str(d1max)
@@ -21,7 +25,7 @@ print 'Median: ' + str(d1med)
 d1dv = np.std(data)
 print 'Standard Deviation: ' + str(d1dv)
 
-binwidth = 60
+binwidth = 30
 plt.hist(data, bins=np.arange(min(data), max(data) + binwidth, binwidth), normed=1)
 plt.xlabel('Duration (min)')
 plt.ylabel('Number of Trips')
