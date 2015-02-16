@@ -6,27 +6,25 @@ plt.switch_backend('Qt4Agg')
 
 data = np.loadtxt('test.csv', delimiter=',', skiprows=1, usecols=(3,), unpack=True)
 data_arange = np.sort(data)
-print data_arange
-split_data = np.split(data_arange, [10,15,30,60,90,120,240,500])
+split_at = data_arange.searchsorted([10,15,30,60,120,700,1000])
+split_data = np.array_split(data_arange, split_at)
 print split_data
+min_list,max_list,mean_list,median_list,std_list = np.array()
+for array in range(0,len(split_data)):
+	print '-=Set ' + str(array) + '=-'
+	print 'Max: ' + str(np.max(split_data[array]))
+	print 'Min: ' + str(np.min(split_data[array]))
+	print 'Mean: ' + str(np.mean(split_data[array]))
+	print 'Median: ' + str(np.median(split_data[array]))
+	print 'Standard Deviation: ' + str(np.std(split_data[array]))
 
-d1max = np.max(data)
-print 'Max: ' + str(d1max)
+	min_list.append(np.min(split_data[array]))
 
-d1min = np.min(data)
-print 'Min: ' + str(d1min)
-
-d1mean = np.mean(data)
-print 'Mean: ' + str(d1mean)
-
-d1med = np.median(data)
-print 'Median: ' + str(d1med)
-
-d1dv = np.std(data)
-print 'Standard Deviation: ' + str(d1dv)
+print min_list
 
 binwidth = 30
-plt.hist(data, bins=np.arange(min(data), max(data) + binwidth, binwidth), normed=1)
+plt.hist(data, bins=30)
+#np.arange(min(data), max(data) + binwidth, binwidth))
 plt.xlabel('Duration (min)')
 plt.ylabel('Number of Trips')
 plt.title('Duration vs Trips')
