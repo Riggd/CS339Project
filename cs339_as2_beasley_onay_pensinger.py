@@ -4,7 +4,7 @@ import re
 
 plt.switch_backend('Qt4Agg')  
 
-data = np.loadtxt('hubway_trips.csv', delimiter=',', skiprows=1, usecols=(3,), unpack=True)
+data = np.loadtxt('hubway_trips_filtered.csv', delimiter=',', skiprows=1, usecols=(3,), unpack=True)
 data_arange = np.sort(data)
 split_at = data_arange.searchsorted([10,15,30,60,120,700,1000])
 split_data = np.array_split(data_arange, split_at)
@@ -49,6 +49,7 @@ plt.xticks(ind + bar_width, ('G1','G2','G3','G4','G5','G6','G7','G8'))
 
 plt.legend()
 plt.tight_layout()
+plt.savefig('chart1.png', bbox_inches='tight')
 plt.show()
 
 # Mean Bar Chart
@@ -65,6 +66,7 @@ plt.xticks(ind + bar_width, ('G1','G2','G3','G4','G5','G6','G7','G8'))
 
 plt.legend()
 plt.tight_layout()
+plt.savefig('chart2.png', bbox_inches='tight')
 plt.show()
 
 # Median Bar Chart
@@ -81,6 +83,7 @@ plt.xticks(ind + bar_width, ('G1','G2','G3','G4','G5','G6','G7','G8'))
 
 plt.legend()
 plt.tight_layout()
+plt.savefig('chart3.png', bbox_inches='tight')
 plt.show()
 
 # Std. Dev. Bar Chart
@@ -97,11 +100,12 @@ plt.xticks(ind + bar_width, ('G1','G2','G3','G4','G5','G6','G7','G8'))
 
 plt.legend()
 plt.tight_layout()
+plt.savefig('chart4.png', bbox_inches='tight')
 plt.show()
 
 # Part 2
 
-data2 = np.loadtxt('test.csv', dtype='string', delimiter=',', skiprows=1, usecols=(12,), unpack=True)
+data2 = np.loadtxt('hubway_trips_filtered.csv', dtype='string', delimiter=',', skiprows=1, usecols=(12,), unpack=True)
 regexp = re.compile('Male')
 male = 0
 female = 0
@@ -122,4 +126,5 @@ plt.xlabel('Gender')
 plt.ylabel('Number of...')
 plt.title('Female vs Male')
 plt.grid(True)
+plt.savefig('chart5.png', bbox_inches='tight')
 plt.show()
