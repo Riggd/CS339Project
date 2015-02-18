@@ -4,7 +4,7 @@ import re
 
 plt.switch_backend('Qt4Agg')  
 
-data = np.loadtxt('hubway_trips_filtered.csv', delimiter=',', skiprows=1, usecols=(3,), unpack=True)
+data = np.loadtxt('hubway_filtered_data.csv', delimiter=',', skiprows=1, usecols=(3,), unpack=True)
 data_arange = np.sort(data)
 split_at = data_arange.searchsorted([10,15,30,60,120,700,1000])
 split_data = np.array_split(data_arange, split_at)
@@ -105,7 +105,7 @@ plt.show()
 
 # Part 2
 
-data2 = np.loadtxt('hubway_trips_filtered.csv', dtype='string', delimiter=',', skiprows=1, usecols=(12,), unpack=True)
+data2 = np.loadtxt('hubway_filtered_data.csv', dtype='string', delimiter=',', skiprows=1, usecols=(12,), unpack=True)
 regexp = re.compile('Male')
 male = 0
 female = 0
